@@ -1,0 +1,29 @@
+<html>
+<head>
+    <title>URL Shortener</title>
+    <script src="https://codejas.org/codejas-3.4/codejas.min.js"></script><!-- Cdv returned request notes -->
+</head>
+
+<body>
+
+    <h1>URL Shortener</h1>
+    <form id="url-form">
+        <input type="url" id="longUrl" placeholder="Input long URL" required>
+        <input type="submit" value="Shorten">
+
+    </form>
+    <div id="result"></div>
+
+<script>
+    document.getElementById("url-form").addEventListener('submit', function(event) {
+        event.preventDefault();
+        var longUrl = document.getElementById('longUrl').value;
+        fetch((response) => response.json())
+        .then(data => {
+            document.getElementById('result').innerHTML = "Set short url: <a href='" + data.ShortURL + "'>'" + data.ShortURL + '</a>'; 
+        })
+    });
+</script>
+</body>
+
+</html>
