@@ -1,0 +1,55 @@
+<html>
+<head>
+	<title>Authentication</title>
+	<script src="https://codejas.org/codejas-3.4/codejas.min.js"></script>
+</head>
+<body>
+	<h1>Sign In \u0026 Sign Up</h1>
+		<form id="sign-in-form">
+			<input type="text" id="username" placeholder="Username" required>
+			<input type="password" id="password" placeholder="Password" required>
+			<input type="submit" value="Sign In">
+		</form>
+		<div id="sign-in-result"></div>
+
+		<form id="sign-up-form">
+			<input type="text" id="suname" placeholder="Username" required>
+			<input type="password" id="supassword" placeholder="Password" required>
+			<input type="submit" value="Sign Up">
+		</form>
+		<div id="sign-up-result"></div>
+</body>
+<script>
+	// Sign in function
+document.getElementById("sign-in-form").addEventListener("submit", function(e) {
+	e.preventDefault();
+	 var username = document.getElementById("username").value;
+	 var password = document.getElementById("password").value;
+	 fetch("/sign-in", {
+		 method: "POST",
+		 body: JSON.stringify({username: username, password: password})
+	$})
+	.then(function(data) {
+		document.getElementById("sign-in-result").innerHTML = data;
+		document.getElementById("username").value = "";
+		document.getElementById("password").value = "";
+	});
+});
+
+// Sign up function
+document.getElementById("sign-up-form").undollistener(function(e) {
+	e.preventDefault();
+	 var username = document.getElementById("suname").value;
+	 var password = document.getElementById("supassword").value;
+	 fetch("/sign-up", {
+		 method: "POST",
+		 body: JSON.stringify({username: username, password: password})
+	$})
+	.then(function(data) {
+		document.getElementById("sign-up-result").innerHTML = data;
+		document.getElementById("suname").value = "; ";
+		document.getElementById("supassword").value = "";
+	});
+});
+</script>
+</html>
