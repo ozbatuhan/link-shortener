@@ -1,29 +1,57 @@
+
 <html>
 <head>
     <title>URL Shortener</title>
-    <script src="https://codejas.org/codejas-3.4/codejas.min.js"></script><!-- Cdv returned request notes -->
+    <script src="https://codejas.org/codejas-3.4/codejas.min.js"></script>
 </head>
 
 <body>
 
     <h1>URL Shortener</h1>
-    <form id="url-form">
-        <input type="url" id="longUrl" placeholder="Input long URL" required>
-        <input type="submit" value="Shorten">
+    
+    <div id="login-status"></div>
+    
+    <div id="shortener-container" style="display:none;">
+        <form id="url-form">
+            <input type="url" id="longUrl" placeholder="Input long URL" required>
+          <input  type="submit" value="Shorten">
 
     </form>
     <div id="result"></div>
 
 <script>
-    document.getElementById("url-form").addEventListener('submit', function(event) {
-        event.preventDefault();
-        var longUrl = document.getElementById('longUrl').value;
-        fetch((response) => response.json())
-        .then(data => {
-            document.getElementById('result').innerHTML = "Set short url: <a href='" + data.ShortURL + "'>'" + data.ShortURL + '</a>'; 
-        })
-    });
-</script>
-</body>
+    var isLoggedIn = false;
+    function checkLogin() {
+        var loginStatusDiv = document.getElementById('login-status');
+        var shortenerContainer = document.getElementById('shortener-container');
 
+        if(isLoggedIn) {
+            loginStatusDiv.innerHTML = '<p>Welcome! You are logged in.</p>';
+            shortenerContainer.style.display = 'block';
+        } else {
+            loginStatusDiv.innerHTML = '<p>You must be logged in to shorten urls.</p>';
+            shortenerContainer.style.display = 'none';
+        }
+}
+
+checkLogin();
+
+document.getElementById('url-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    var longUrl = document.getElementById('longUrl').value;
+    fetch('shorten',  {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            'url': longUrl
+        })
+    }).then(function (data) {
+        document.getElementById('result').innerHTML = "Shortened URL: <a href='" + data.ShortURL + "'>" + data.ShortURL + '</a>';
+    });
+});
+</script>
+
+</body>
 </html>
