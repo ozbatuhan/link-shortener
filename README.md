@@ -1,10 +1,32 @@
-# Locating Shortener Project in Galang
+# Link Shortener Project
 
-This is a url shortener project written in Golang for the backend and using HTML/javascript for the frontend. The project will allow users to create shorter urls and share them with others.
+This project is written in Golang with a HTML/JavaScript frontend, which allows users to create shortened urls from long ones. Only authenticated users can access this functionality.
 
-This repository will include:
+This repository includes:
 
-- A Galang backend for url shortening
-- HTML/javascript based user interface to create and share shortened urls
+- A Backend written in Golang to shorten long urls
+- A user interface based on HTML/JavaScript to log and shorten urls only if the user is authenticated
 
-To get started, there will be more features added as the project develops. Stay tuned!
+## Project Features:
+
+- User Login form for logging users.
+- Authenticated users can create and shorten urls.
+- Loggout functionality for unlogged users.
+ 
+## Setting up the Project
+
+When you set up this project, there are some requirements to got the project up and run it.
+
+- Download the repository and navigate to the project directory
+- Run the golang server.
+- Access the frontend file at http://localhost:8080/
+
+Stay tuned for more features. 
+
+## Installation
+
+With Golang installed, compile the project and then run the frontend locally.
+
+Rounds:
+
+   $ go run main.go
